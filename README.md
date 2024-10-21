@@ -80,6 +80,11 @@ This project is a **Movie Rating Service** built with Flask. It allows users to 
 - `POST /register`: Register a new user (admin or regular user).
 - `POST /login`: Login and receive a JWT token.
 
+<p align="center">
+  <img src="imgs/register.png" alt="Image 1" height="300" />
+  <img src="imgs/login.png" alt="Image 2" height="300" />
+</p>
+
 ### **Movie Management (Admin)**
 
 - `POST /movies`: Add a new movie (admin-only).
