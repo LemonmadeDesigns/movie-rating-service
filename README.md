@@ -108,7 +108,7 @@ This project is a **Movie Rating Service** built with Flask. It allows users to 
 
 ## Recording and Submission
 
-- [] Record your screen using a screen recorder (OBS Studio or any other tool) to showcase the code and Postman requests.
+- [x] Record your screen using a screen recorder (OBS Studio or any other tool) to showcase the code and Postman requests.
 - [x] Upload the recording as part of the submission.
 - [x] Provide the GitHub repository link.
 
@@ -116,8 +116,8 @@ This project is a **Movie Rating Service** built with Flask. It allows users to 
 
 This project was developed collaboratively by the following team members:
 
-- **Terrell D Lemons** (CWID: 886659440)
-- **Kyle Williams** (CWID: 886805050)
+- **[Terrell D Lemons](LemonsTerrell@csu.fullerton.edu)** (CWID: 886659440)
+- **[Kyle Williams](Kyle.williams953@csu.fullerton.edu)** (CWID: 886805050)
 - **Luis Valle-Arellanes** (CWID: 889900429)
 
 ## Contribution
