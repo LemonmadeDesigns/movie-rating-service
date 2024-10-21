@@ -130,21 +130,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ---
 
-### **Steps to Update the README on GitHub:**
-
-1. After editing your `README.md` file, add and commit the changes:
-
-   ```bash
-   git add README.md
-   git commit -m "Updated README with co-developers"
-   ```
-
-1. Push the changes to GitHub:
-
-   ```bash
-   git push origin master
-   ```
-
-This will update your `README.md` on GitHub with the co-developers’ names. Make sure to include this information in your project recording as well.
-
 [movie-rating-service](https://github.com/LemonmadeDesigns/movie-rating-service)
