@@ -26,3 +26,7 @@ class Rating(db.Model):
     rating = db.Column(db.Integer, nullable=False)
     review = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    # Relationships
+    movie = db.relationship('Movie', backref='ratings', lazy=True)
+    user = db.relationship('User', backref='ratings', lazy=True)
