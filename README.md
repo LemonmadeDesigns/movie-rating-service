@@ -40,7 +40,7 @@ This project is a **Movie Rating Service** built with Flask. It allows users to 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/movie-rating-service.git
+   git clone https://github.com/LemonmadeDesigns/movie-rating-service.git
    cd movie-rating-service
    ```
 
@@ -108,7 +108,7 @@ This project is a **Movie Rating Service** built with Flask. It allows users to 
 
 ## Recording and Submission
 
-- [x] Record your screen using a screen recorder (OBS Studio or any other tool) to showcase the code and Postman requests.
+- [] Record your screen using a screen recorder (OBS Studio or any other tool) to showcase the code and Postman requests.
 - [x] Upload the recording as part of the submission.
 - [x] Provide the GitHub repository link.
 
@@ -146,4 +146,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
    ```
 
 This will update your `README.md` on GitHub with the co-developers’ names. Make sure to include this information in your project recording as well.
-# movie-rating-service
+
+[movie-rating-service](https://github.com/LemonmadeDesigns/movie-rating-service)
