@@ -184,4 +184,6 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ---
 
+## GitHub
+
 [movie-rating-service](https://github.com/LemonmadeDesigns/movie-rating-service)
