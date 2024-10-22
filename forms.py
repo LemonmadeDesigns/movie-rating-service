@@ -2,6 +2,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, Length, NumberRange
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
@@ -29,3 +30,10 @@ class RatingForm(FlaskForm):
     ])
     review = TextAreaField('Review')
     submit = SubmitField('Submit Rating')
+    
+class FileUploadForm(FlaskForm):
+    file = FileField('File', validators=[
+        FileRequired(),
+        FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Images only!')
+    ])
+    submit = SubmitField('Upload File')
