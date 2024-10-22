@@ -180,7 +180,7 @@ The project is actively maintained and follows best practices for Flask applicat
 
 ## Recording
 
-[Recording of Completed App & Functionality](ttps://drive.google.com/file/d/1Szte0jPwRnGdVhyyQOagxNJYMM6n1f9u/view?usp=sharing)
+[Recording of Completed App & Functionality](https://drive.google.com/file/d/1Szte0jPwRnGdVhyyQOagxNJYMM6n1f9u/view?usp=sharing)
 
 ---
 
