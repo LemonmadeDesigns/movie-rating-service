@@ -1,38 +1,43 @@
 # Movie Rating Service
 
-This project is a **Movie Rating Service** built with Flask. It allows users to register, authenticate, add movies, submit ratings, and view movie details. The service also supports file uploads with restricted file extensions.
+This project is a **Movie Rating Service** built with Flask. It allows users to register, authenticate, view movies, and submit ratings. The service includes role-based access control (admin/user) and a clean web interface.
 
 ## Project Features
 
-### 1. User Authentication
+### 1. User Authentication & Authorization
 
-- **User Registration**: Users (admin and regular) can sign up via a registration endpoint.
-- **User Login**: JWT-based authentication for login and token generation.
+- **User Registration**: Users can sign up with username and password
+- **User Login**: Session-based authentication with Flask-Login
+- **Role-Based Access**: Different functionalities for admin and regular users
+- **User Session Management**: Secure login/logout functionality
 
 ### 2. Movie Management (Admin Only)
 
-- **Add Movie**: Admins can add a new movie to the database.
-- **Delete Movie Ratings**: Admins can delete any user's rating for a movie.
+- **Add Movies**: Admins can add new movies with title, description, and release year
+- **Edit Movies**: Admins can modify existing movie details
+- **Delete Movies**: Admins can remove movies from the database
+- **View All Movies**: Comprehensive movie listing with management options
 
-### 3. User Ratings
+### 3. User Rating System
 
-- **Submit Rating**: Users can rate a movie that exists in the database.
-- **Update Rating**: Users can update their own ratings.
-- **Delete Rating**: Users can delete their own ratings.
-- **Retrieve Ratings**: Retrieve all user ratings for all movies.
-- **Fetch Movie Details**: Retrieve details for a specific movie, including user ratings.
+- **Submit Ratings**: Regular users can rate movies (1-5 stars) and add reviews
+- **View Ratings**: Users can see all movie ratings
+- **Update Ratings**: Users can modify their own ratings
+- **Delete Ratings**: Users can remove their own ratings
 
-### 4. File Upload
+### 4. File Upload Support
 
-- A separate API supports file uploads and restricts the allowed file extensions. Supported extensions include `.jpg`, `.png`, and `.pdf`.
+- Restricted file upload functionality supporting specific extensions (png, jpg, jpeg, gif)
+- Secure file handling and storage
 
 ## Technology Stack
 
 - **Backend**: Flask (Python)
-- **Frontend**: HTML
-- **Authentication**: JWT (JSON Web Token)
-- **Database**: PostgreSQL
-- **ORM**: SQLAlchemy
+- **Database**: PostgreSQL with SQLAlchemy ORM
+- **Frontend**: Bootstrap 5, HTML templates with Jinja2
+- **Authentication**: Flask-Login
+- **Forms**: Flask-WTF
+- **Security**: CSRF protection, password hashing
 - **Environment**: Virtualenv for dependency management
 
 ## Installation Guide
@@ -44,12 +49,12 @@ This project is a **Movie Rating Service** built with Flask. It allows users to 
    cd movie-rating-service
    ```
 
-2. Create a virtual environment and activate it:
+2. Create and activate virtual environment:
 
    ```bash
    python3 -m venv venv
    source venv/bin/activate  # For Linux/Mac
-   venv\Scripts\activate  # For Windows
+   venv\Scripts\activate     # For Windows
    ```
 
 3. Install dependencies:
@@ -58,76 +63,120 @@ This project is a **Movie Rating Service** built with Flask. It allows users to 
    pip install -r requirements.txt
    ```
 
-4. Set up environment variables (e.g., for JWT secret key):
+4. Set up PostgreSQL database:
+
+   ```bash
+   psql postgres
+   CREATE DATABASE movie_rating_service;
+   \q
+   ```
+
+5. Initialize the database and create admin user:
 
    ```bash
    export FLASK_APP=app.py
-   export JWT_SECRET_KEY='your_jwt_secret_key'
+   export FLASK_ENV=development
+   
+   # Initialize database tables
+   flask db init
+   flask db migrate -m "initial schema"
+   flask db upgrade
+   
+   # Create admin user and add sample data
+   python manage.py init-db
+   python manage.py create-admin admin password123
+   python manage.py add-sample-movies
    ```
 
-5. Run the Flask application:
+6. Run the application:
 
    ```bash
-   flask run
+   python app.py
    ```
 
-6. Use Postman or cURL to interact with the API.
+7. Access the application at `http://localhost:5000`
 
-## API Endpoints
+## Available Routes
 
-### **User Authentication**
+### User Authentication
 
-- `POST /register`: Register a new user (admin or regular user).
-- `POST /login`: Login and receive a JWT token.
+- `/auth/register` - User registration
+- `/auth/login` - User login
+- `/auth/logout` - User logout
 
-<p align="center">
-  <img src="imgs/register.png" alt="Image 1" height="300" />
-  <img src="imgs/login.png" alt="Image 2" height="300" />
-</p>
+### Movie Management
 
-### **Movie Management (Admin)**
+- `/movies/` - View all movies
+- `/movies/add` - Add new movie (admin only)
+- `/movies/edit/<id>` - Edit movie (admin only)
+- `/movies/delete/<id>` - Delete movie (admin only)
 
-- `POST /movies`: Add a new movie (admin-only).
-- `DELETE /ratings/{movie_id}/{user_id}`: Admin can delete any user’s rating.
+### Rating System
 
-### **User Ratings**
+- `/ratings/<movie_id>/rate` - Rate a movie
+- `/ratings/<movie_id>/rating/<rating_id>/delete` - Delete rating
 
-- `POST /movies/{movie_id}/rate`: Rate a movie.
-- `PUT /movies/{movie_id}/rate`: Update user rating.
-- `DELETE /movies/{movie_id}/rate`: Delete user rating.
-- `GET /ratings`: Get all user ratings.
-- `GET /movies/{movie_id}`: Get details of a specific movie, including its ratings.
+### File Upload
 
-### **File Upload**
+- `/files/upload` - Upload files with restricted extensions
 
-- `POST /upload`: Upload a file (allowed extensions: `.jpg`, `.png`, `.pdf`).
+## User Roles
 
-## Testing
+### Admin Users
 
-- Use **Postman** to test the API endpoints.
-- Run the following command to execute the unit tests (if implemented):
+- Can add, edit, and delete movies
+- Cannot submit ratings
+- Can view all movies and ratings
+- Can delete any rating
 
-  ```bash
-  python -m unittest discover
-  ```
+### Regular Users
 
-## Recording and Submission
+- Can view all movies
+- Can submit, edit, and delete their own ratings
+- Cannot modify movie information
 
-- [x] Record your screen using a screen recorder (OBS Studio or any other tool) to showcase the code and Postman requests.
-- [x] Upload the recording as part of the submission.
-- [x] Provide the GitHub repository link.
+## Database Schema
+
+### Users
+
+- id (Primary Key)
+- username (Unique)
+- password (Hashed)
+- role (admin/user)
+- active (Boolean)
+- created_at (Timestamp)
+
+### Movies
+
+- id (Primary Key)
+- title
+- description
+- release_year
+- created_at (Timestamp)
+
+### Ratings
+
+- id (Primary Key)
+- movie_id (Foreign Key)
+- user_id (Foreign Key)
+- rating (1-5)
+- review (Text)
+- created_at (Timestamp)
 
 ## Contributors
-
-This project was developed collaboratively by the following team members:
 
 - **[Terrell D Lemons](LemonsTerrell@csu.fullerton.edu)** (CWID: 886659440)
 - **[Kyle Williams](Kyle.williams953@csu.fullerton.edu)** (CWID: 886805050)
 - **Luis Valle-Arellanes** (CWID: 889900429)
 
-## Contribution
+## Project Status
 
-Feel free to fork this repository and submit pull requests. Any improvements or suggestions are welcome!
+The project is actively maintained and follows best practices for Flask application development. Future enhancements may include:
+
+- Advanced search functionality
+- User profile management
+- Rating analytics and statistics
+- Enhanced admin dashboard
 
 ## License
 

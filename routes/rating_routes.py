@@ -1,68 +1,62 @@
 # routes/rating_routes.py
-from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from sqlalchemy.exc import SQLAlchemyError
-from models import Rating, Movie, User
+from flask import Blueprint, render_template, redirect, url_for, flash
+from flask_login import login_required, current_user
+from forms import RatingForm
+from models import Rating, Movie
 from database import db
 
-rating_bp = Blueprint('rating', __name__)
+rating_bp = Blueprint('ratings', __name__)
 
-# User: Add or update rating for a movie
-@rating_bp.route('/<int:movie_id>/rate', methods=['POST', 'PUT'])
-@jwt_required()
+@rating_bp.route('/<int:movie_id>/rate', methods=['GET', 'POST'])
+@login_required
 def rate_movie(movie_id):
-    current_user = get_jwt_identity()
-    if current_user['role'] == 'admin':
-        return jsonify(message="Admins cannot rate movies"), 403
+    if current_user.role == 'admin':
+        flash('Admins cannot rate movies.', 'warning')
+        return redirect(url_for('movie.get_movies'))
+    
+    movie = Movie.query.get_or_404(movie_id)
+    form = RatingForm()
+    
+    # Check if user has already rated this movie
+    existing_rating = Rating.query.filter_by(
+        movie_id=movie_id,
+        user_id=current_user.id
+    ).first()
+    
+    if existing_rating:
+        form.rating.data = existing_rating.rating
+        form.review.data = existing_rating.review
+    
+    if form.validate_on_submit():
+        if existing_rating:
+            existing_rating.rating = form.rating.data
+            existing_rating.review = form.review.data
+            flash('Your rating has been updated!', 'success')
+        else:
+            rating = Rating(
+                movie_id=movie_id,
+                user_id=current_user.id,
+                rating=form.rating.data,
+                review=form.review.data
+            )
+            db.session.add(rating)
+            flash('Your rating has been submitted!', 'success')
+        
+        db.session.commit()
+        return redirect(url_for('movie.get_movies'))
+    
+    return render_template('rate_movie.html', form=form, movie=movie)
 
-    movie = Movie.query.get(movie_id)
-    if not movie:
-        return jsonify(message="Movie not found"), 404
-
-    data = request.get_json()
-    rating_value = data['rating']
-    review = data.get('review', '')
-
-    rating = Rating.query.filter_by(movie_id=movie_id, user_id=current_user['id']).first()
-    if rating:
-        rating.rating = rating_value
-        rating.review = review
-    else:
-        rating = Rating(movie_id=movie_id, user_id=current_user['id'], rating=rating_value, review=review)
-        db.session.add(rating)
-
-    db.session.commit()
-
-    return jsonify(message="Rating submitted/updated successfully"), 201
-
-# User: Delete their own rating
-@rating_bp.route('/<int:movie_id>/rating/<int:rating_id>/delete', methods=['DELETE'])
-@jwt_required()
-def delete_own_rating(movie_id, rating_id):
-    current_user = get_jwt_identity()
-
-    rating = Rating.query.filter_by(id=rating_id, user_id=current_user['id']).first()
-    if not rating:
-        return jsonify(message="Rating not found"), 404
-
+@rating_bp.route('/<int:movie_id>/rating/<int:rating_id>/delete', methods=['POST'])
+@login_required
+def delete_rating(movie_id, rating_id):
+    rating = Rating.query.get_or_404(rating_id)
+    
+    if current_user.role != 'admin' and current_user.id != rating.user_id:
+        flash('You cannot delete this rating.', 'danger')
+        return redirect(url_for('movie.get_movies'))
+    
     db.session.delete(rating)
     db.session.commit()
-
-    return jsonify(message="Your rating has been deleted"), 200
-
-# Admin: Delete any rating
-@rating_bp.route('/<int:movie_id>/rating/<int:rating_id>/delete/admin', methods=['DELETE'])
-@jwt_required()
-def delete_rating_admin(movie_id, rating_id):
-    current_user = get_jwt_identity()
-    if current_user['role'] != 'admin':
-        return jsonify(message="Admins only!"), 403
-
-    rating = Rating.query.get(rating_id)
-    if not rating:
-        return jsonify(message="Rating not found"), 404
-
-    db.session.delete(rating)
-    db.session.commit()
-
-    return jsonify(message="Rating deleted successfully"), 200
+    flash('Rating deleted successfully!', 'success')
+    return redirect(url_for('movie.get_movies'))

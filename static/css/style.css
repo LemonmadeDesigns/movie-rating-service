@@ -1,0 +1,13 @@
+
+.btn-warning {
+  border-radius: .2rem;
+}
+
+.btn-danger {
+  margin-left: 10px;
+}
+
+.btn-warning, .btn-danger {
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+}

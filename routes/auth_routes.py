@@ -1,6 +1,6 @@
-import requests
+# routes/auth_routes.py
 from flask import Blueprint, render_template, redirect, url_for, flash, request
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from forms import RegistrationForm, LoginForm
 from models import User
@@ -8,69 +8,62 @@ from database import db
 
 auth_bp = Blueprint('auth', __name__)
 
-# Registration route
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm()
-    # if form.validate_on_submit():
-    #     # Send POST request to the /auth/register route with the form data
-    #     response = requests.post('http://localhost:5000/auth/register', json={
-    #         'username': form.username.data,
-    #         'password': form.password.data
-    #     })
-    #     if response.status_code == 201:
-    #         flash('Registration successful! Please log in.', 'success')
-    #         return redirect(url_for('auth.login'))
-    #     else:
-    #         flash('Registration failed.', 'danger')
+    if current_user.is_authenticated:
+        return redirect(url_for('movie.get_movies'))
     
+    form = RegistrationForm()
     if form.validate_on_submit():
-        username = form.username.data
-        password = generate_password_hash(form.password.data)
-        role = 'user'  # Default to user role
-
-        user = User(username=username, password=password, role=role)
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            flash('Username already exists. Please choose a different one.', 'danger')
+            return render_template('register.html', form=form)
+            
+        user = User(
+            username=form.username.data,
+            password=generate_password_hash(form.password.data),
+            role='user',
+            active=True
+        )
         db.session.add(user)
-        db.session.commit()
-        flash("User registered successfully!", "success")
-        return redirect(url_for('auth.login'))
+        try:
+            db.session.commit()
+            flash('Registration successful! Please login.', 'success')
+            return redirect(url_for('auth.login'))
+        except Exception as e:
+            db.session.rollback()
+            flash('An error occurred. Please try again.', 'danger')
+            return render_template('register.html', form=form)
     
     return render_template('register.html', form=form)
 
-# Login route
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    # if form.validate_on_submit():
+    if current_user.is_authenticated:
+        return redirect(url_for('movie.get_movies'))
         
-    #     # Send POST request to the /auth/login route with the form data
-    #     response = requests.post('http://localhost:5000/auth/login', json={
-    #         'username': form.username.data,
-    #         'password': form.password.data
-    #     })
-    #     if response.status_code == 200:
-    #         flash('Login successful!', 'success')
-    #         return redirect(url_for('auth.protected'))
-    #     else:
-    #         flash('Login failed. Check your username and password.', 'danger')
-    
+    form = LoginForm()
     if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-
-        user = User.query.filter_by(username=username).first()
-        if user and check_password_hash(user.password, password):
-            access_token = create_access_token(identity={'id': user.id, 'username': user.username, 'role': user.role})
-            flash("Login successful!", "success")
-            return redirect(url_for('auth.protected'))
-
-        flash("Invalid credentials", "danger")
+        user = User.query.filter_by(username=form.username.data).first()
+        
+        if user and check_password_hash(user.password, form.password.data):
+            if not user.active:
+                flash('This account has been deactivated.', 'danger')
+                return render_template('login.html', form=form)
+                
+            login_user(user)
+            flash('Login successful!', 'success')
+            next_page = request.args.get('next')
+            return redirect(next_page if next_page else url_for('movie.get_movies'))
+        else:
+            flash('Invalid username or password', 'danger')
     
     return render_template('login.html', form=form)
 
-# Protected route
-@auth_bp.route('/protected', methods=['GET'])
-@jwt_required()  # This requires JWT authentication
-def protected():
-    current_user = get_jwt_identity()
-    return f"This is a protected page. Welcome, {current_user['username']}."
+@auth_bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('auth.login'))

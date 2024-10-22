@@ -1,0 +1,198 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+env.py	../migrations/env.py	1;"	kind:file	line:1
+logging	../migrations/env.py	/^import logging$/;"	kind:namespace	line:1
+fileConfig	../migrations/env.py	/^from logging.config import fileConfig$/;"	kind:namespace	line:2
+current_app	../migrations/env.py	/^from flask import current_app$/;"	kind:namespace	line:4
+context	../migrations/env.py	/^from alembic import context$/;"	kind:namespace	line:6
+config	../migrations/env.py	/^config = context.config$/;"	kind:variable	line:10
+logger	../migrations/env.py	/^logger = logging.getLogger('alembic.env')$/;"	kind:variable	line:15
+get_engine	../migrations/env.py	/^def get_engine():$/;"	kind:function	line:18
+get_engine_url	../migrations/env.py	/^def get_engine_url():$/;"	kind:function	line:27
+target_db	../migrations/env.py	/^target_db = current_app.extensions['migrate'].db$/;"	kind:variable	line:40
+get_metadata	../migrations/env.py	/^def get_metadata():$/;"	kind:function	line:48
+run_migrations_offline	../migrations/env.py	/^def run_migrations_offline():$/;"	kind:function	line:54
+run_migrations_online	../migrations/env.py	/^def run_migrations_online():$/;"	kind:function	line:75
+process_revision_directives	../migrations/env.py	/^    def process_revision_directives(context, revision, directives):$/;"	kind:function	line:86
+602a66d9ba2a_initial_migration.py	../migrations/versions/602a66d9ba2a_initial_migration.py	1;"	kind:file	line:1
+op	../migrations/versions/602a66d9ba2a_initial_migration.py	/^from alembic import op$/;"	kind:namespace	line:8
+sa	../migrations/versions/602a66d9ba2a_initial_migration.py	/^import sqlalchemy as sa$/;"	kind:namespace	line:9
+revision	../migrations/versions/602a66d9ba2a_initial_migration.py	/^revision = '602a66d9ba2a'$/;"	kind:variable	line:13
+down_revision	../migrations/versions/602a66d9ba2a_initial_migration.py	/^down_revision = None$/;"	kind:variable	line:14
+branch_labels	../migrations/versions/602a66d9ba2a_initial_migration.py	/^branch_labels = None$/;"	kind:variable	line:15
+depends_on	../migrations/versions/602a66d9ba2a_initial_migration.py	/^depends_on = None$/;"	kind:variable	line:16
+upgrade	../migrations/versions/602a66d9ba2a_initial_migration.py	/^def upgrade():$/;"	kind:function	line:19
+downgrade	../migrations/versions/602a66d9ba2a_initial_migration.py	/^def downgrade():$/;"	kind:function	line:35
+config.py	../config.py	1;"	kind:file	line:1
+os	../config.py	/^import os$/;"	kind:namespace	line:2
+urllib	../config.py	/^import urllib.parse$/;"	kind:namespace	line:3
+parse	../config.py	/^import urllib.parse$/;"	kind:namespace	line:3
+Config	../config.py	/^class Config:$/;"	kind:class	line:5
+SECRET_KEY	../config.py	/^    SECRET_KEY = os.getenv('SECRET_KEY', 'your_secret_key')$/;"	kind:variable	line:6
+SQLALCHEMY_DATABASE_URI	../config.py	/^    SQLALCHEMY_DATABASE_URI = 'postgresql:\/\/postgres'+ '@localhost\/movie_rating_service'$/;"	kind:variable	line:7
+SQLALCHEMY_TRACK_MODIFICATIONS	../config.py	/^    SQLALCHEMY_TRACK_MODIFICATIONS = False$/;"	kind:variable	line:8
+models.py	../models.py	1;"	kind:file	line:1
+datetime	../models.py	/^from datetime import datetime$/;"	kind:namespace	line:2
+db	../models.py	/^from database import db  # Import db from database.py$/;"	kind:namespace	line:3
+Import	../models.py	/^from database import db  # Import db from database.py$/;"	kind:namespace	line:3
+db	../models.py	/^from database import db  # Import db from database.py$/;"	kind:namespace	line:3
+from	../models.py	/^from database import db  # Import db from database.py$/;"	kind:namespace	line:3
+database	../models.py	/^from database import db  # Import db from database.py$/;"	kind:namespace	line:3
+py	../models.py	/^from database import db  # Import db from database.py$/;"	kind:namespace	line:3
+User	../models.py	/^class User(db.Model):$/;"	kind:class	line:5
+__tablename__	../models.py	/^    __tablename__ = 'users'$/;"	kind:variable	line:6
+id	../models.py	/^    id = db.Column(db.Integer, primary_key=True)$/;"	kind:variable	line:7
+username	../models.py	/^    username = db.Column(db.String(255), nullable=False, unique=True)$/;"	kind:variable	line:8
+password	../models.py	/^    password = db.Column(db.String(255), nullable=False)$/;"	kind:variable	line:9
+role	../models.py	/^    role = db.Column(db.String(20), nullable=False, default='user')$/;"	kind:variable	line:10
+created_at	../models.py	/^    created_at = db.Column(db.DateTime, default=datetime.utcnow)$/;"	kind:variable	line:11
+Movie	../models.py	/^class Movie(db.Model):$/;"	kind:class	line:13
+__tablename__	../models.py	/^    __tablename__ = 'movies'$/;"	kind:variable	line:14
+id	../models.py	/^    id = db.Column(db.Integer, primary_key=True)$/;"	kind:variable	line:15
+title	../models.py	/^    title = db.Column(db.String(255), nullable=False)$/;"	kind:variable	line:16
+description	../models.py	/^    description = db.Column(db.Text)$/;"	kind:variable	line:17
+release_year	../models.py	/^    release_year = db.Column(db.Integer)$/;"	kind:variable	line:18
+created_at	../models.py	/^    created_at = db.Column(db.DateTime, default=datetime.utcnow)$/;"	kind:variable	line:19
+Rating	../models.py	/^class Rating(db.Model):$/;"	kind:class	line:21
+__tablename__	../models.py	/^    __tablename__ = 'ratings'$/;"	kind:variable	line:22
+id	../models.py	/^    id = db.Column(db.Integer, primary_key=True)$/;"	kind:variable	line:23
+movie_id	../models.py	/^    movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'), nullable=False)$/;"	kind:variable	line:24
+user_id	../models.py	/^    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)$/;"	kind:variable	line:25
+rating	../models.py	/^    rating = db.Column(db.Integer, nullable=False)$/;"	kind:variable	line:26
+review	../models.py	/^    review = db.Column(db.Text)$/;"	kind:variable	line:27
+created_at	../models.py	/^    created_at = db.Column(db.DateTime, default=datetime.utcnow)$/;"	kind:variable	line:28
+movie	../models.py	/^    movie = db.relationship('Movie', backref='ratings', lazy=True)$/;"	kind:variable	line:31
+user	../models.py	/^    user = db.relationship('User', backref='ratings', lazy=True)$/;"	kind:variable	line:32
+database.py	../database.py	1;"	kind:file	line:1
+SQLAlchemy	../database.py	/^from flask_sqlalchemy import SQLAlchemy$/;"	kind:namespace	line:2
+db	../database.py	/^db = SQLAlchemy()$/;"	kind:variable	line:4
+forms.py	../forms.py	1;"	kind:file	line:1
+FlaskForm	../forms.py	/^from flask_wtf import FlaskForm$/;"	kind:namespace	line:2
+StringField	../forms.py	/^from wtforms import StringField, PasswordField, SubmitField$/;"	kind:namespace	line:3
+PasswordField	../forms.py	/^from wtforms import StringField, PasswordField, SubmitField$/;"	kind:namespace	line:3
+SubmitField	../forms.py	/^from wtforms import StringField, PasswordField, SubmitField$/;"	kind:namespace	line:3
+DataRequired	../forms.py	/^from wtforms.validators import DataRequired, Length$/;"	kind:namespace	line:4
+Length	../forms.py	/^from wtforms.validators import DataRequired, Length$/;"	kind:namespace	line:4
+RegistrationForm	../forms.py	/^class RegistrationForm(FlaskForm):$/;"	kind:class	line:6
+username	../forms.py	/^    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])$/;"	kind:variable	line:7
+password	../forms.py	/^    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])$/;"	kind:variable	line:8
+submit	../forms.py	/^    submit = SubmitField('Register')$/;"	kind:variable	line:9
+LoginForm	../forms.py	/^class LoginForm(FlaskForm):$/;"	kind:class	line:11
+username	../forms.py	/^    username = StringField('Username', validators=[DataRequired()])$/;"	kind:variable	line:12
+password	../forms.py	/^    password = PasswordField('Password', validators=[DataRequired()])$/;"	kind:variable	line:13
+submit	../forms.py	/^    submit = SubmitField('Login')$/;"	kind:variable	line:14
+app.py	../app.py	1;"	kind:file	line:1
+psycopg2	../app.py	/^import psycopg2$/;"	kind:namespace	line:1
+sql	../app.py	/^from psycopg2 import sql$/;"	kind:namespace	line:2
+Flask	../app.py	/^from flask import Flask, jsonify$/;"	kind:namespace	line:3
+jsonify	../app.py	/^from flask import Flask, jsonify$/;"	kind:namespace	line:3
+CSRFProtect	../app.py	/^from flask_wtf.csrf import CSRFProtect$/;"	kind:namespace	line:4
+JWTManager	../app.py	/^from flask_jwt_extended import JWTManager$/;"	kind:namespace	line:5
+Config	../app.py	/^from config import Config$/;"	kind:namespace	line:6
+Migrate	../app.py	/^from flask_migrate import Migrate$/;"	kind:namespace	line:7
+db	../app.py	/^from database import db  # Import from the database.py$/;"	kind:namespace	line:8
+Import	../app.py	/^from database import db  # Import from the database.py$/;"	kind:namespace	line:8
+from	../app.py	/^from database import db  # Import from the database.py$/;"	kind:namespace	line:8
+the	../app.py	/^from database import db  # Import from the database.py$/;"	kind:namespace	line:8
+database	../app.py	/^from database import db  # Import from the database.py$/;"	kind:namespace	line:8
+py	../app.py	/^from database import db  # Import from the database.py$/;"	kind:namespace	line:8
+migrate	../app.py	/^migrate = Migrate()$/;"	kind:variable	line:11
+csrf	../app.py	/^csrf = CSRFProtect()  # CSRF protection for forms$/;"	kind:variable	line:12
+jwt	../app.py	/^jwt = JWTManager()    # JWT manager for handling tokens$/;"	kind:variable	line:13
+create_database	../app.py	/^def create_database():$/;"	kind:function	line:15
+create_app	../app.py	/^def create_app():$/;"	kind:function	line:47
+create_tables	../app.py	/^    def create_tables():$/;"	kind:function	line:64
+home	../app.py	/^    def home():$/;"	kind:function	line:69
+movie_bp	../app.py	/^    from routes.movie_routes import movie_bp$/;"	kind:namespace	line:73
+rating_bp	../app.py	/^    from routes.rating_routes import rating_bp$/;"	kind:namespace	line:74
+file_bp	../app.py	/^    from routes.file_upload import file_bp$/;"	kind:namespace	line:75
+auth_bp	../app.py	/^    from routes.auth_routes import auth_bp$/;"	kind:namespace	line:76
+movie_bp	../app.py	/^    from routes.movie_routes import movie_bp$/;"	kind:namespace	line:77
+app	../app.py	/^    app = create_app()$/;"	kind:variable	line:93
+activate_this.py	../venv/bin/activate_this.py	1;"	kind:file	line:1
+annotations	../venv/bin/activate_this.py	/^from __future__ import annotations$/;"	kind:namespace	line:7
+os	../venv/bin/activate_this.py	/^import os$/;"	kind:namespace	line:9
+site	../venv/bin/activate_this.py	/^import site$/;"	kind:namespace	line:10
+sys	../venv/bin/activate_this.py	/^import sys$/;"	kind:namespace	line:11
+abs_file	../venv/bin/activate_this.py	/^    abs_file = os.path.abspath(__file__)$/;"	kind:variable	line:14
+bin_dir	../venv/bin/activate_this.py	/^bin_dir = os.path.dirname(abs_file)$/;"	kind:variable	line:18
+base	../venv/bin/activate_this.py	/^base = bin_dir[: -len("bin") - 1]  # strip away the bin part from the __file__, plus the path separator$/;"	kind:variable	line:19
+prev_length	../venv/bin/activate_this.py	/^prev_length = len(sys.path)$/;"	kind:variable	line:26
+path	../venv/bin/activate_this.py	/^    path = os.path.realpath(os.path.join(bin_dir, lib))$/;"	kind:variable	line:28
+movie_routes.py	../routes/movie_routes.py	1;"	kind:file	line:1
+Blueprint	../routes/movie_routes.py	/^from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify$/;"	kind:namespace	line:2
+render_template	../routes/movie_routes.py	/^from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify$/;"	kind:namespace	line:2
+request	../routes/movie_routes.py	/^from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify$/;"	kind:namespace	line:2
+redirect	../routes/movie_routes.py	/^from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify$/;"	kind:namespace	line:2
+url_for	../routes/movie_routes.py	/^from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify$/;"	kind:namespace	line:2
+flash	../routes/movie_routes.py	/^from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify$/;"	kind:namespace	line:2
+jsonify	../routes/movie_routes.py	/^from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify$/;"	kind:namespace	line:2
+jwt_required	../routes/movie_routes.py	/^from flask_jwt_extended import jwt_required, get_jwt_identity$/;"	kind:namespace	line:3
+get_jwt_identity	../routes/movie_routes.py	/^from flask_jwt_extended import jwt_required, get_jwt_identity$/;"	kind:namespace	line:3
+db	../routes/movie_routes.py	/^from database import db$/;"	kind:namespace	line:4
+Movie	../routes/movie_routes.py	/^from models import Movie$/;"	kind:namespace	line:5
+SQLAlchemyError	../routes/movie_routes.py	/^from sqlalchemy.exc import SQLAlchemyError$/;"	kind:namespace	line:6
+movie_bp	../routes/movie_routes.py	/^movie_bp = Blueprint('movie', __name__)$/;"	kind:variable	line:9
+get_movies	../routes/movie_routes.py	/^def get_movies():$/;"	kind:function	line:13
+add_movie	../routes/movie_routes.py	/^def add_movie():$/;"	kind:function	line:31
+edit_movie	../routes/movie_routes.py	/^def edit_movie(movie_id):$/;"	kind:function	line:60
+get_movie_details	../routes/movie_routes.py	/^def get_movie_details(movie_id):$/;"	kind:function	line:87
+delete_movie	../routes/movie_routes.py	/^def delete_movie(movie_id):$/;"	kind:function	line:109
+rating_routes.py	../routes/rating_routes.py	1;"	kind:file	line:1
+Blueprint	../routes/rating_routes.py	/^from flask import Blueprint, request, jsonify$/;"	kind:namespace	line:2
+request	../routes/rating_routes.py	/^from flask import Blueprint, request, jsonify$/;"	kind:namespace	line:2
+jsonify	../routes/rating_routes.py	/^from flask import Blueprint, request, jsonify$/;"	kind:namespace	line:2
+jwt_required	../routes/rating_routes.py	/^from flask_jwt_extended import jwt_required, get_jwt_identity$/;"	kind:namespace	line:3
+get_jwt_identity	../routes/rating_routes.py	/^from flask_jwt_extended import jwt_required, get_jwt_identity$/;"	kind:namespace	line:3
+SQLAlchemyError	../routes/rating_routes.py	/^from sqlalchemy.exc import SQLAlchemyError$/;"	kind:namespace	line:4
+Rating	../routes/rating_routes.py	/^from models import Rating, Movie, User$/;"	kind:namespace	line:5
+Movie	../routes/rating_routes.py	/^from models import Rating, Movie, User$/;"	kind:namespace	line:5
+User	../routes/rating_routes.py	/^from models import Rating, Movie, User$/;"	kind:namespace	line:5
+db	../routes/rating_routes.py	/^from database import db$/;"	kind:namespace	line:6
+rating_bp	../routes/rating_routes.py	/^rating_bp = Blueprint('rating', __name__)$/;"	kind:variable	line:8
+rate_movie	../routes/rating_routes.py	/^def rate_movie(movie_id):$/;"	kind:function	line:13
+update_rating	../routes/rating_routes.py	/^def update_rating(movie_id):$/;"	kind:function	line:38
+delete_own_rating	../routes/rating_routes.py	/^def delete_own_rating(movie_id, rating_id):$/;"	kind:function	line:67
+delete_rating_admin	../routes/rating_routes.py	/^def delete_rating_admin(movie_id, rating_id):$/;"	kind:function	line:82
+auth_routes.py	../routes/auth_routes.py	1;"	kind:file	line:1
+requests	../routes/auth_routes.py	/^import requests$/;"	kind:namespace	line:1
+Blueprint	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+render_template	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+redirect	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+url_for	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+flash	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+request	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+session	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+jsonify	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+Import	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+Flask	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+session	../routes/auth_routes.py	/^from flask import Blueprint, render_template, redirect, url_for, flash, request, session, jsonify  # Import Flask session$/;"	kind:namespace	line:2
+create_access_token	../routes/auth_routes.py	/^from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity$/;"	kind:namespace	line:3
+jwt_required	../routes/auth_routes.py	/^from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity$/;"	kind:namespace	line:3
+get_jwt_identity	../routes/auth_routes.py	/^from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity$/;"	kind:namespace	line:3
+check_password_hash	../routes/auth_routes.py	/^from werkzeug.security import check_password_hash, generate_password_hash$/;"	kind:namespace	line:4
+generate_password_hash	../routes/auth_routes.py	/^from werkzeug.security import check_password_hash, generate_password_hash$/;"	kind:namespace	line:4
+RegistrationForm	../routes/auth_routes.py	/^from forms import RegistrationForm, LoginForm$/;"	kind:namespace	line:5
+LoginForm	../routes/auth_routes.py	/^from forms import RegistrationForm, LoginForm$/;"	kind:namespace	line:5
+User	../routes/auth_routes.py	/^from models import User$/;"	kind:namespace	line:6
+db	../routes/auth_routes.py	/^from database import db$/;"	kind:namespace	line:7
+auth_bp	../routes/auth_routes.py	/^auth_bp = Blueprint('auth', __name__)$/;"	kind:variable	line:9
+register	../routes/auth_routes.py	/^def register():$/;"	kind:function	line:13
+login	../routes/auth_routes.py	/^def login():$/;"	kind:function	line:30
+protected	../routes/auth_routes.py	/^def protected():$/;"	kind:function	line:65
+file_upload.py	../routes/file_upload.py	1;"	kind:file	line:1
+os	../routes/file_upload.py	/^import os$/;"	kind:namespace	line:2
+Blueprint	../routes/file_upload.py	/^from flask import Blueprint, request, jsonify$/;"	kind:namespace	line:3
+request	../routes/file_upload.py	/^from flask import Blueprint, request, jsonify$/;"	kind:namespace	line:3
+jsonify	../routes/file_upload.py	/^from flask import Blueprint, request, jsonify$/;"	kind:namespace	line:3
+jwt_required	../routes/file_upload.py	/^from flask_jwt_extended import jwt_required$/;"	kind:namespace	line:4
+secure_filename	../routes/file_upload.py	/^from werkzeug.utils import secure_filename$/;"	kind:namespace	line:5
+ALLOWED_EXTENSIONS	../routes/file_upload.py	/^ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}$/;"	kind:variable	line:7
+UPLOAD_FOLDER	../routes/file_upload.py	/^UPLOAD_FOLDER = 'uploads\/'$/;"	kind:variable	line:8
+file_bp	../routes/file_upload.py	/^file_bp = Blueprint('files', __name__)$/;"	kind:variable	line:10
+allowed_file	../routes/file_upload.py	/^def allowed_file(filename):$/;"	kind:function	line:12
+upload_file	../routes/file_upload.py	/^def upload_file():$/;"	kind:function	line:17
