@@ -178,9 +178,9 @@ The project is actively maintained and follows best practices for Flask applicat
 - Rating analytics and statistics
 - Enhanced admin dashboard
 
-## License
+## Recording
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+[Recording of Completed App & Functionality](ttps://drive.google.com/file/d/1Szte0jPwRnGdVhyyQOagxNJYMM6n1f9u/view?usp=sharing)
 
 ---
 
